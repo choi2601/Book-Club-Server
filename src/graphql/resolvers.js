@@ -1,16 +1,14 @@
 import TemplateAPI from '../api/template.api';
 
+import Product from '../models/product';
+
 export const ProductResolvers = {
   Date: new Date(),
   Query: {
     products: async () => {
-      const { data } = await TemplateAPI.getTemplateData();
+      const currentProducts = await Product.find().exec();
 
-      try {
-        return data;
-      } catch (e) {
-        console.error(e);
-      }
+      console.log(currentProducts);
     },
   },
 };

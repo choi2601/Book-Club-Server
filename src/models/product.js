@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import mongoose from '../../node_modules/mongoose/types/index';
+import mongoose from 'mongoose';
 
 const MeetingsSchema = new Schema({
   order: Number,
@@ -25,7 +25,7 @@ const ProductSchema = new Schema({
   club: ClubSchema,
   price: Number,
   leaders: [ConnectionSchema],
-  leaders: [ConnectionSchema],
+  partners: [ConnectionSchema],
 });
 
 const Product = mongoose.model('Product', ProductSchema);

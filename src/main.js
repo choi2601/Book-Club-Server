@@ -6,6 +6,8 @@ import mongoose from 'mongoose';
 
 import schema from './graphql/schema';
 
+import createTemplateData from './createTemplateData';
+
 const { PORT, MONGO_URI } = process.env;
 
 (async function startApolloServer(schema) {
@@ -31,6 +33,7 @@ mongoose
   .connect(MONGO_URI, { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to MongoDB');
+    createTemplateData();
   })
   .catch((e) => {
     console.error(e);
