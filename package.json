@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "apollo-server-koa": "^3.6.7",
+    "axios": "^0.27.1",
     "dotenv": "^16.0.0",
     "eslint-config-prettier": "^8.5.0",
     "esm": "^3.2.25",

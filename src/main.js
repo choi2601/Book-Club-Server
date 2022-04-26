@@ -1,13 +1,12 @@
 require('dotenv').config();
 
 import Koa from 'Koa';
-import Router from 'koa-router';
-import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-koa';
+import mongoose from 'mongoose';
 
 import schema from './graphql/schema';
 
-const { PORT, MONGO_URL } = process.env;
+const { PORT, MONGO_URI } = process.env;
 
 (async function startApolloServer(schema) {
   const apolloServer = new ApolloServer({
@@ -21,9 +20,18 @@ const { PORT, MONGO_URL } = process.env;
   apolloServer.applyMiddleware({ app, path: '/' });
 
   await new Promise((resolve) =>
-    app.listen({ port: PORT || MONGO_URL }, resolve),
+    app.listen({ port: PORT || MONGO_URI }, resolve),
   );
   console.log(
     `🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`,
   );
 })(schema);
+
+mongoose
+  .connect(MONGO_URI, { useNewUrlParser: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((e) => {
+    console.error(e);
+  });
